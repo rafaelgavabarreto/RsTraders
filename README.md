@@ -2,6 +2,7 @@
 
 RsTraders is as an educational tool for individuals interested in exploring or investing in cryptocurrency. User transactions are stored in the simulated blockchain (designed specifically for this project). Blockchain is run locally on the server. Built the blockchain in JavaScript to mine transactions and stored blocks as flat file. Stack used to develop the app: React, Material UI, Chartjs, Nodejs, Express, Knex and postgreSQL. If you have any questions, you can contact me directly!
 
+Try: https://rstraders-demo.herokuapp.com/
 
 ## Getting Started
 
