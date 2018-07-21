@@ -25,7 +25,7 @@
     "yarn": "^1.7.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "cd express-api && (nodemon server.js &) && cd .. && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
