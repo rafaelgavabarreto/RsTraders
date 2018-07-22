@@ -5,11 +5,6 @@ const router      = express.Router();
 const app         = express();
 const adminUser   = '1';
 
-
-var writeFile = function (file, value) {
-  fs.writeFileSync(file, JSON.stringify(value) , 'utf-8'); 
-}
-
 class Block {
   constructor(transactions, previousHash = '') {
     this.timestamp = Date.now();
@@ -44,26 +39,6 @@ class BlockChain{
     this.mineReward = 1; //reward to the bank who confirm or generate the block
   }
 
-  // loadBlocks() {
-  //   fs.readdir('./blocks/', (err, files) => {
-  //     let count = files.length;
-  //     for(let block = 1; block < count;block++) {
-  //       let blockFile = fs.readFileSync("./blocks/"+block, "utf-8");
-  //       console.log(JSON.parse(blockFile));
-  //       this.chain.push(JSON.parse(blockFile));
-  //     }
-  //     // console.log(this.chain);
-  //   });
-  // }
-
-  loadTransaction() {
-    let files = fs.readdirSync("../express-api/blocks/");
-    for(let count = 0;count < files.length;count ++) {
-      this.pendingTransactions.push(JSON.parse(fs.readFileSync("../express-api/blocks/"+count, "utf-8")));
-      this.mineTransaction(adminUser);
-    }
-  }
-
   // loadTransactions(value) {
   //   this.pendingTransactions.push(value);
   // }
@@ -86,9 +61,6 @@ class BlockChain{
   }
 
   addTransaction(transaction){
-    var files = fs.readdirSync('.../express-api/blocks/');
-    var count = files.length;
-    writeFile("../express-api/blocks/"+count,transaction);
     this.pendingTransactions.push(transaction);
   }
 
@@ -168,19 +140,6 @@ class Transaction{
 module.exports = function(blockchainRoutes) {
 
   let RSTCoin = new BlockChain();
-  RSTCoin.loadTransaction();
-
-  // RSTCoin.mineTransaction(adminUser);
-
-
-  // fs.readdir('./blocks/', (err, files) => {
-  //   console.log(files);
-  //   for(let count = 0;count < files.length;count ++) {
-  //     RSTCoin.loadTransaction(JSON.parse(fs.readFileSync("./blocks/"+count, "utf-8")));
-  //     // this.pendingTransactions.push(JSON.parse(fs.readFileSync("../../blocks/"+count, "utf-8")));
-  //     RSTCoin.mineTransaction(adminUser);
-  //   }
-  // });
 
   // Base web page to login into the system. If the user is login send session to /urls
   router.get("/balance", (req, res) => {
