@@ -57,9 +57,9 @@ class BlockChain{
   // }
 
   loadTransaction() {
-    let files = fs.readdirSync("./express-api/blocks/");
+    let files = fs.readdirSync("../express-api/blocks/");
     for(let count = 0;count < files.length;count ++) {
-      this.pendingTransactions.push(JSON.parse(fs.readFileSync("./express-api/blocks/"+count, "utf-8")));
+      this.pendingTransactions.push(JSON.parse(fs.readFileSync("../express-api/blocks/"+count, "utf-8")));
       this.mineTransaction(adminUser);
     }
   }
@@ -86,9 +86,9 @@ class BlockChain{
   }
 
   addTransaction(transaction){
-    var files = fs.readdirSync('./express-api/blocks/');
+    var files = fs.readdirSync('.../express-api/blocks/');
     var count = files.length;
-    writeFile("./express-api/blocks/"+count,transaction);
+    writeFile("../express-api/blocks/"+count,transaction);
     this.pendingTransactions.push(transaction);
   }
 
