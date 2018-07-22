@@ -4,7 +4,6 @@ require('dotenv').config();
 
 const PORT = process.env.PORT || 4000;
 
-
 const bcrypt        = require("bcrypt");
 const ENV           = process.env.ENV || "development";
 const cors          = require('cors')
@@ -22,6 +21,8 @@ const MONGODB_URI   = 'mongodb://localhost:27017/blockchain';
 const knexConfig    = require("./knexfile");
 const knex          = require("knex")(knexConfig[ENV]);
 const knexLogger    = require('knex-logger');
+
+app.set('host', process.env.HOST || '0.0.0.0');
 
 // Log knex SQL queries to STDOUT as well
 app.use(knexLogger(knex));
@@ -80,5 +81,8 @@ app.use("/api/blockchain", blockchainRoutes(knex));
 //   res.json({message: 'Hello World!, from POST'})
 // })
 
-app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
- 
+// app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
+
+app.listen(app.get('port'), app.get('host'), function(){
+  console.log(`Express server listening on port ${PORT}`);
+});
